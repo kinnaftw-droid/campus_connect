@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Gather - Delhi Product Meetup</title>
+<!-- Tailwind CSS CDN with forms and container queries plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              navy: '#0f172a',
+              dark: '#1e293b',
+              accent: '#2563eb',
+              canvas: '#f8fafc'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+            mono: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'monospace']
+          }
+        }
+      }
+    };
+  </script>
+<!-- BEGIN: Custom Ticket & Layout Styling -->
+<style data-purpose="ticket-perforation">
+    /* Ticket notch cutout styling */
+    .ticket-notch-top {
+      position: absolute;
+      top: -14px;
+      right: 140px;
+      width: 28px;
+      height: 28px;
+      background-color: #f8fafc;
+      border-radius: 9999px;
+      border: 1px solid #e2e8f0;
+      clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0 100%);
+      z-index: 10;
+    }
+
+    .ticket-notch-bottom {
+      position: absolute;
+      bottom: -14px;
+      right: 140px;
+      width: 28px;
+      height: 28px;
+      background-color: #f8fafc;
+      border-radius: 9999px;
+      border: 1px solid #e2e8f0;
+      clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
+      z-index: 10;
+    }
+
+    @media (max-width: 640px) {
+      .ticket-notch-top, .ticket-notch-bottom {
+        display: none;
+      }
+    }
+  </style>
+<!-- END: Custom Ticket & Layout Styling -->
+</head>
+<body class="bg-brand-canvas text-slate-800 min-h-screen flex flex-col font-sans antialiased">
+<!-- BEGIN: MainHeader -->
+<header class="bg-white border-b border-slate-200 sticky top-0 z-30">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+<!-- Brand Logo -->
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-slate-900 rounded-lg flex items-center justify-center text-white font-black text-sm tracking-wider shadow-sm">
+          G
+        </div>
+<span class="text-xl font-extrabold tracking-tight text-slate-900 uppercase">Gather</span>
+</div>
+<!-- Center Navigation Pills -->
+<nav class="hidden md:flex items-center bg-slate-100 p-1 rounded-full border border-slate-200/80" data-purpose="primary-navigation">
+<a class="px-5 py-1.5 rounded-full text-sm font-semibold bg-slate-900 text-white shadow-sm transition-colors duration-150" href="#">
+          Events
+        </a>
+<a class="px-5 py-1.5 rounded-full text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors duration-150" href="#">
+          My registrations
+        </a>
+<a class="px-5 py-1.5 rounded-full text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors duration-150" href="#">
+          Organizer
+        </a>
+</nav>
+<!-- User Profile Badge -->
+<div class="flex items-center gap-2.5 bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-full" data-purpose="user-badge">
+<div class="w-7 h-7 rounded-full bg-slate-800 text-white text-xs font-bold flex items-center justify-center">
+          AK
+        </div>
+<span class="text-xs font-medium text-slate-700 hidden sm:inline">ananya@example.com</span>
+</div>
+</div>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: MainContent -->
+<main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+<!-- Back to Events Link -->
+<div class="mb-6">
+<a class="inline-flex items-center text-sm font-medium text-slate-600 hover:text-slate-900 group transition-colors" href="#">
+<span class="mr-2 group-hover:-translate-x-1 transition-transform">←</span>
+        All events
+      </a>
+</div>
+<!-- BEGIN: HeroGrid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start mb-16">
+<!-- Big White Ticket Card (Left / Main Column) -->
+<div class="lg:col-span-8 bg-white rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden flex flex-col sm:flex-row" data-purpose="event-ticket-card">
+<!-- Notches for perforated ticket styling -->
+<div class="ticket-notch-top"></div>
+<div class="ticket-notch-bottom"></div>
+<!-- Left / Body of Ticket -->
+<div class="p-6 sm:p-8 flex-1 flex flex-col justify-between">
+<div>
+<!-- Status Badge -->
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200/60 mb-5">
+<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              Open for registration
+            </div>
+<!-- Event Title -->
+<h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 leading-tight mb-8">
+              Delhi Product Meetup
+            </h1>
+</div>
+<!-- Metadata Section -->
+<div class="space-y-2 pt-6 border-t border-slate-100 font-mono text-xs text-slate-500">
+<div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4">
+<span class="font-semibold text-slate-700 uppercase tracking-wider text-[11px] w-24">Organizer:</span>
+<span class="text-slate-900 select-all font-sans text-sm">rohit@example.com</span>
+</div>
+<div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4">
+<span class="font-semibold text-slate-700 uppercase tracking-wider text-[11px] w-24">Event ID:</span>
+<span class="text-slate-600 select-all">0f2e1df1-2eae-4e11-b84c-8fd3d631ad19</span>
+</div>
+</div>
+</div>
+<!-- Perforated Stub Line & Right Stub -->
+<div class="sm:w-[140px] border-t sm:border-t-0 sm:border-l border-dashed border-slate-300 bg-slate-50/70 p-6 flex flex-row sm:flex-col items-center justify-center text-center">
+<div>
+<span class="block text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">150</span>
+<span class="text-xs uppercase tracking-wider font-semibold text-slate-500 mt-1 block">seats total</span>
+</div>
+</div>
+</div>
+<!-- Action Panel: Save Your Seat (Right Column) -->
+<div class="lg:col-span-4 bg-slate-900 rounded-2xl p-6 sm:p-7 text-white shadow-md border border-slate-800 flex flex-col justify-between" data-purpose="registration-action-card">
+<div>
+<h2 class="text-xl font-bold tracking-tight text-white mb-3">Save your seat</h2>
+<p class="text-slate-300 text-sm leading-relaxed mb-6">
+            You're signed in as <span class="text-white font-medium underline underline-offset-2">ananya@example.com</span>. One click and you're on the list.
+          </p>
+</div>
+<div>
+<!-- Registration Button -->
+<button class="w-full py-3.5 px-4 bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white font-semibold text-sm rounded-xl transition duration-150 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-slate-900" id="registerBtn" type="button">
+            Register for this event
+          </button>
+<p class="text-xs text-slate-400 text-center mt-4">
+            Find it any time under <a class="text-slate-300 hover:underline" href="#">My registrations</a>.
+          </p>
+</div>
+</div>
+</div>
+<!-- END: HeroGrid -->
+<!-- BEGIN: FeedbackStateGallery -->
+<section class="mt-8 pt-8 border-t border-slate-200" data-purpose="post-registration-states">
+<div class="mb-4">
+<h3 class="text-base font-semibold text-slate-900">What people see after clicking Register</h3>
+<p class="text-xs text-slate-500">Interactive feedback states shown as prompt alerts or notifications.</p>
+</div>
+<!-- Grid of toast feedback messages -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<!-- State 1: Success -->
+<div class="bg-white border border-emerald-200 rounded-xl p-4 shadow-sm flex items-start gap-3.5" data-purpose="status-registered">
+<div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center flex-shrink-0 mt-0.5">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24">
+<path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<div>
+<h4 class="text-sm font-semibold text-slate-900">You're registered</h4>
+<p class="text-xs text-slate-500 mt-0.5">Your ticket is now in My registrations.</p>
+</div>
+</div>
+<!-- State 2: Info (Already Registered) -->
+<div class="bg-white border border-sky-200 rounded-xl p-4 shadow-sm flex items-start gap-3.5" data-purpose="status-already-registered">
+<div class="w-8 h-8 rounded-full bg-sky-100 text-sky-600 flex items-center justify-center flex-shrink-0 mt-0.5">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24">
+<path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<div>
+<h4 class="text-sm font-semibold text-slate-900">Already registered</h4>
+<p class="text-xs text-slate-500 mt-0.5">You already have a seat for this event.</p>
+</div>
+</div>
+<!-- State 3: Warning (Event Full) -->
+<div class="bg-white border border-amber-200 rounded-xl p-4 shadow-sm flex items-start gap-3.5" data-purpose="status-event-full">
+<div class="w-8 h-8 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center flex-shrink-0 mt-0.5">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24">
+<path d="M20 12H4" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<div>
+<h4 class="text-sm font-semibold text-slate-900">Event is full</h4>
+<p class="text-xs text-slate-500 mt-0.5">All seats are taken. Try another event.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- END: FeedbackStateGallery -->
+</main>
+<!-- END: MainContent -->
+<!-- BEGIN: MainFooter -->
+<footer class="bg-white border-t border-slate-200 mt-auto py-6" data-purpose="page-footer">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+<!-- Footer Logo -->
+<div class="flex items-center gap-2">
+<span class="font-extrabold tracking-wider text-slate-900 uppercase">GATHER</span>
+</div>
+<!-- Links -->
+<div class="flex items-center space-x-2">
+<a class="hover:text-slate-800 transition-colors" href="#">Events</a>
+<span>·</span>
+<a class="hover:text-slate-800 transition-colors" href="#">My registrations</a>
+<span>·</span>
+<a class="hover:text-slate-800 transition-colors" href="#">Organizer</a>
+</div>
+<!-- Tagline -->
+<div class="text-slate-400">
+        Event registration made simple.
+      </div>
+</div>
+</footer>
+<!-- END: MainFooter -->
+<!-- Optional Interactivity for Demo Purposes -->
+<script data-purpose="registration-demo-toggle">
+    // Interactive feedback when pressing the register button
+    const registerBtn = document.getElementById('registerBtn');
+    if (registerBtn) {
+      registerBtn.addEventListener('click', function () {
+        const originalText = this.innerText;
+        this.innerText = 'Registering...';
+        this.disabled = true;
+        setTimeout(() => {
+          this.innerText = "✓ You're registered";
+          this.classList.remove('bg-blue-600', 'hover:bg-blue-500');
+          this.classList.add('bg-emerald-600');
+        }, 600);
+      });
+    }
+  </script>
+</body></html>

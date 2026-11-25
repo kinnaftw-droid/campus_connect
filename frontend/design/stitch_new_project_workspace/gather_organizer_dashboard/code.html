@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Gather - Organizer Dashboard</title>
+<!-- Tailwind CSS v3 CDN with Forms and Container Queries -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Font: Plus Jakarta Sans / Inter style font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            gather: {
+              dark: '#0f172a',
+              navy: '#111827',
+              blue: '#2563eb',
+              'blue-hover': '#1d4ed8',
+              badge: '#f1f5f9',
+              border: '#e2e8f0',
+              grayBg: '#f8fafc',
+            }
+          }
+        }
+      }
+    }
+  </script>
+<!-- BEGIN: Custom Ticket Styling & Notches -->
+<style data-purpose="ticket-cutouts">
+    /* Ticket perforation divider and circular notches matching Gather's design */
+    .ticket-stub-divider {
+      position: relative;
+    }
+    .notch-top {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      width: 20px;
+      height: 20px;
+      background-color: #f8fafc;
+      border-radius: 9999px;
+      border-bottom: 1px solid #e2e8f0;
+      z-index: 10;
+    }
+    .notch-bottom {
+      position: absolute;
+      bottom: -10px;
+      right: -10px;
+      width: 20px;
+      height: 20px;
+      background-color: #f8fafc;
+      border-radius: 9999px;
+      border-top: 1px solid #e2e8f0;
+      z-index: 10;
+    }
+  </style>
+<!-- END: Custom Ticket Styling & Notches -->
+</head>
+<body class="bg-[#f8fafc] text-slate-800 font-sans min-h-screen flex flex-col antialiased">
+<!-- BEGIN: MainHeader -->
+<header class="bg-white border-b border-slate-200 sticky top-0 z-30">
+<div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+<!-- Brand Logo -->
+<a class="flex items-center gap-3 group" href="#">
+<div class="w-9 h-9 bg-slate-900 rounded-lg flex items-center justify-center text-white shadow-sm group-hover:bg-slate-800 transition-colors">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24">
+<path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"></path>
+<path d="M13 5v2"></path>
+<path d="M13 17v2"></path>
+<path d="M13 11v2"></path>
+</svg>
+</div>
+<span class="font-extrabold tracking-wider text-slate-900 text-lg uppercase">GATHER</span>
+</a>
+<!-- Center Navigation Capsule -->
+<nav class="hidden md:flex items-center bg-[#f1f5f9] p-1.5 rounded-full border border-slate-200/80 shadow-inner">
+<a class="px-5 py-2 text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors rounded-full" href="#">
+          Events
+        </a>
+<a class="px-5 py-2 text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors rounded-full" href="#">
+          My registrations
+        </a>
+<a class="px-5 py-2 text-sm font-semibold bg-[#111827] text-white shadow-sm rounded-full transition-all" href="#">
+          Organizer
+        </a>
+</nav>
+<!-- User Profile Badge -->
+<div class="flex items-center">
+<div class="flex items-center gap-2.5 bg-white border border-slate-200 rounded-full py-1.5 px-3.5 shadow-sm hover:border-slate-300 transition-colors cursor-pointer">
+<span class="w-7 h-7 rounded-full bg-slate-800 text-white font-semibold text-xs flex items-center justify-center tracking-tight">
+            AK
+          </span>
+<span class="text-sm font-medium text-slate-700">ananya@example.com</span>
+</div>
+</div>
+</div>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: MainContent -->
+<main class="flex-grow max-w-7xl w-full mx-auto px-6 py-10">
+<!-- BEGIN: DashboardHeader -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
+<div>
+<h1 class="text-3xl font-extrabold text-slate-900 tracking-tight">Organizer dashboard</h1>
+<p class="text-slate-500 mt-1.5 text-base">Manage your hosted meetups, monitor attendee counts, and inspect event health.</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="inline-flex items-center gap-2 bg-[#111827] hover:bg-slate-800 text-white px-5 py-3 rounded-xl font-semibold text-sm shadow-sm transition-all active:scale-[0.99]">
+<svg class="w-4 h-4 stroke-[2.5]" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<line x1="12" x2="12" y1="5" y2="19"></line>
+<line x1="5" x2="19" y1="12" y2="12"></line>
+</svg>
+          Create new event
+        </button>
+</div>
+</div>
+<!-- END: DashboardHeader -->
+<!-- BEGIN: QuickStatsRow -->
+<section aria-label="Organizer Key Metrics" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+<!-- Metric 1 -->
+<div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
+<div class="flex items-center justify-between text-slate-500 text-xs font-semibold uppercase tracking-wider">
+<span>Total Events</span>
+<span class="p-1.5 bg-blue-50 text-blue-600 rounded-lg">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</span>
+</div>
+<div class="mt-3 flex items-baseline gap-2">
+<span class="text-3xl font-extrabold text-slate-900">4</span>
+<span class="text-xs font-medium text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">2 currently active</span>
+</div>
+</div>
+<!-- Metric 2 -->
+<div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
+<div class="flex items-center justify-between text-slate-500 text-xs font-semibold uppercase tracking-wider">
+<span>Total Attendees</span>
+<span class="p-1.5 bg-indigo-50 text-indigo-600 rounded-lg">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</span>
+</div>
+<div class="mt-3 flex items-baseline gap-2">
+<span class="text-3xl font-extrabold text-slate-900">412</span>
+<span class="text-xs font-medium text-slate-500">registered total</span>
+</div>
+</div>
+<!-- Metric 3 -->
+<div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
+<div class="flex items-center justify-between text-slate-500 text-xs font-semibold uppercase tracking-wider">
+<span>Avg. Fill Rate</span>
+<span class="p-1.5 bg-emerald-50 text-emerald-600 rounded-lg">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</span>
+</div>
+<div class="mt-3 flex items-baseline gap-2">
+<span class="text-3xl font-extrabold text-slate-900">88%</span>
+<span class="text-xs font-medium text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">High demand</span>
+</div>
+</div>
+<!-- Metric 4 -->
+<div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
+<div class="flex items-center justify-between text-slate-500 text-xs font-semibold uppercase tracking-wider">
+<span>Upcoming in 7 Days</span>
+<span class="p-1.5 bg-amber-50 text-amber-600 rounded-lg">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</span>
+</div>
+<div class="mt-3 flex items-baseline gap-2">
+<span class="text-3xl font-extrabold text-slate-900">2</span>
+<span class="text-xs font-medium text-slate-500">meetups planned</span>
+</div>
+</div>
+</section>
+<!-- END: QuickStatsRow -->
+<!-- BEGIN: EventsSection -->
+<section aria-label="Hosted Events List" class="space-y-5 mb-14">
+<div class="flex items-center justify-between mb-2">
+<h2 class="text-xl font-bold text-slate-900">Your hosted events</h2>
+<span class="text-sm font-medium text-slate-500">Sorted by event date</span>
+</div>
+<!-- Ticket 1: Delhi Product Meetup (Blue) -->
+<article class="bg-white border border-slate-200 rounded-2xl shadow-sm hover:border-slate-300 transition-all overflow-hidden flex flex-col md:flex-row items-stretch">
+<!-- Colored Left Accent -->
+<div class="w-full md:w-3.5 bg-blue-600 shrink-0 h-2 md:h-auto"></div>
+<!-- Main Body Details -->
+<div class="flex-grow p-6 flex flex-col justify-between gap-5">
+<div class="flex flex-col sm:flex-row sm:items-start gap-4">
+<!-- Badge Icon Initial -->
+<div class="w-14 h-14 rounded-2xl bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-700 font-bold text-lg shrink-0">
+              DP
+            </div>
+<div class="space-y-2 flex-grow">
+<div class="flex flex-wrap items-center gap-2.5">
+<span class="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-700 text-xs font-semibold px-2.5 py-1 rounded-full border border-emerald-200/60">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                  Open for registration
+                </span>
+<span class="text-xs text-slate-400 font-mono">0f2e1df1-2eae-4e11</span>
+</div>
+<h3 class="text-xl font-bold text-slate-900">Delhi Product Meetup</h3>
+<p class="text-sm text-slate-500">Venue: WeWork Forum, Cybercity Gurugram • Speaker: Rohit Verma</p>
+</div>
+</div>
+<!-- Capacity Bar & Action Buttons -->
+<div class="pt-3 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<!-- Capacity bar -->
+<div class="max-w-xs w-full">
+<div class="flex justify-between text-xs font-semibold mb-1.5">
+<span class="text-slate-700">Capacity filled</span>
+<span class="text-blue-700 font-mono font-bold">142 / 150 (95%)</span>
+</div>
+<div class="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
+<div class="bg-blue-600 h-2 rounded-full" style="width: 95%"></div>
+</div>
+</div>
+<!-- Action buttons -->
+<div class="flex flex-wrap items-center gap-2">
+<button class="px-3.5 py-1.5 text-xs font-semibold text-slate-700 bg-white border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors">
+                Share link
+              </button>
+<button class="px-3.5 py-1.5 text-xs font-semibold text-blue-700 bg-blue-50 border border-blue-200 rounded-lg hover:bg-blue-100 transition-colors">
+                View attendees (142)
+              </button>
+<button class="px-4 py-1.5 text-xs font-semibold text-white bg-[#111827] hover:bg-slate-800 rounded-lg shadow-sm transition-colors">
+                Manage event
+              </button>
+</div>
+</div>
+</div>
+<!-- Ticket Perforation & Date Stub -->
+<div class="border-t md:border-t-0 md:border-l border-dashed border-slate-300 relative px-8 py-6 flex md:flex-col items-center justify-center text-center shrink-0 min-w-[170px] bg-slate-50/40">
+<div class="notch-top hidden md:block"></div>
+<div class="notch-bottom hidden md:block"></div>
+<div>
+<span class="text-[11px] font-bold tracking-widest text-slate-400 uppercase block">EVENT DATE</span>
+<span class="text-3xl font-extrabold text-slate-900 block my-0.5 tracking-tight">18</span>
+<span class="text-xs font-semibold text-slate-500 block">Nov 2026</span>
+</div>
+</div>
+</article>
+<!-- Ticket 2: Flask APIs in one evening (Green) -->
+<article class="bg-white border border-slate-200 rounded-2xl shadow-sm hover:border-slate-300 transition-all overflow-hidden flex flex-col md:flex-row items-stretch">
+<!-- Colored Left Accent -->
+<div class="w-full md:w-3.5 bg-emerald-500 shrink-0 h-2 md:h-auto"></div>
+<!-- Main Body Details -->
+<div class="flex-grow p-6 flex flex-col justify-between gap-5">
+<div class="flex flex-col sm:flex-row sm:items-start gap-4">
+<!-- Badge Icon Initial -->
+<div class="w-14 h-14 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-700 font-bold text-lg shrink-0">
+              FA
+            </div>
+<div class="space-y-2 flex-grow">
+<div class="flex flex-wrap items-center gap-2.5">
+<span class="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-700 text-xs font-semibold px-2.5 py-1 rounded-full border border-emerald-200/60">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                  Open for registration
+                </span>
+<span class="text-xs text-slate-400 font-mono">8c3a99e2-3b10-410a</span>
+</div>
+<h3 class="text-xl font-bold text-slate-900">Flask APIs in one evening</h3>
+<p class="text-sm text-slate-500">Virtual hands-on workshop • Python backend architecture fundamentals</p>
+</div>
+</div>
+<!-- Capacity Bar & Action Buttons -->
+<div class="pt-3 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<!-- Capacity bar -->
+<div class="max-w-xs w-full">
+<div class="flex justify-between text-xs font-semibold mb-1.5">
+<span class="text-slate-700">Capacity filled</span>
+<span class="text-emerald-700 font-mono font-bold">38 / 40 (95%)</span>
+</div>
+<div class="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
+<div class="bg-emerald-500 h-2 rounded-full" style="width: 95%"></div>
+</div>
+</div>
+<!-- Action buttons -->
+<div class="flex flex-wrap items-center gap-2">
+<button class="px-3.5 py-1.5 text-xs font-semibold text-slate-700 bg-white border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors">
+                Export CSV
+              </button>
+<button class="px-3.5 py-1.5 text-xs font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-lg hover:bg-emerald-100 transition-colors">
+                View attendees (38)
+              </button>
+<button class="px-4 py-1.5 text-xs font-semibold text-white bg-[#111827] hover:bg-slate-800 rounded-lg shadow-sm transition-colors">
+                Manage event
+              </button>
+</div>
+</div>
+</div>
+<!-- Ticket Perforation & Date Stub -->
+<div class="border-t md:border-t-0 md:border-l border-dashed border-slate-300 relative px-8 py-6 flex md:flex-col items-center justify-center text-center shrink-0 min-w-[170px] bg-slate-50/40">
+<div class="notch-top hidden md:block"></div>
+<div class="notch-bottom hidden md:block"></div>
+<div>
+<span class="text-[11px] font-bold tracking-widest text-slate-400 uppercase block">EVENT DATE</span>
+<span class="text-3xl font-extrabold text-slate-900 block my-0.5 tracking-tight">22</span>
+<span class="text-xs font-semibold text-slate-500 block">Nov 2026</span>
+</div>
+</div>
+</article>
+<!-- Ticket 3: Design systems clinic (Amber - Closed) -->
+<article class="bg-white border border-slate-200 rounded-2xl shadow-sm hover:border-slate-300 transition-all overflow-hidden flex flex-col md:flex-row items-stretch opacity-95">
+<!-- Colored Left Accent -->
+<div class="w-full md:w-3.5 bg-amber-500 shrink-0 h-2 md:h-auto"></div>
+<!-- Main Body Details -->
+<div class="flex-grow p-6 flex flex-col justify-between gap-5">
+<div class="flex flex-col sm:flex-row sm:items-start gap-4">
+<!-- Badge Icon Initial -->
+<div class="w-14 h-14 rounded-2xl bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-700 font-bold text-lg shrink-0">
+              DS
+            </div>
+<div class="space-y-2 flex-grow">
+<div class="flex flex-wrap items-center gap-2.5">
+<span class="inline-flex items-center gap-1.5 bg-slate-100 text-slate-600 text-xs font-semibold px-2.5 py-1 rounded-full border border-slate-200">
+<span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span>
+                  Closed • Event ended
+                </span>
+<span class="text-xs text-slate-400 font-mono">119de74-90a1-432d</span>
+</div>
+<h3 class="text-xl font-bold text-slate-900">Design systems clinic</h3>
+<p class="text-sm text-slate-500">Live Figma review and component tokenization workshop</p>
+</div>
+</div>
+<!-- Capacity Bar & Action Buttons -->
+<div class="pt-3 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<!-- Capacity bar -->
+<div class="max-w-xs w-full">
+<div class="flex justify-between text-xs font-semibold mb-1.5">
+<span class="text-slate-700">Final attendance</span>
+<span class="text-amber-700 font-mono font-bold">30 / 30 (100% full)</span>
+</div>
+<div class="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
+<div class="bg-amber-500 h-2 rounded-full" style="width: 100%"></div>
+</div>
+</div>
+<!-- Action buttons -->
+<div class="flex flex-wrap items-center gap-2">
+<button class="px-3.5 py-1.5 text-xs font-semibold text-slate-700 bg-white border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors">
+                Attendee feedback
+              </button>
+<button class="px-4 py-1.5 text-xs font-semibold text-slate-800 bg-slate-100 hover:bg-slate-200 rounded-lg shadow-sm transition-colors">
+                View recap
+              </button>
+</div>
+</div>
+</div>
+<!-- Ticket Perforation & Date Stub -->
+<div class="border-t md:border-t-0 md:border-l border-dashed border-slate-300 relative px-8 py-6 flex md:flex-col items-center justify-center text-center shrink-0 min-w-[170px] bg-slate-50/40">
+<div class="notch-top hidden md:block"></div>
+<div class="notch-bottom hidden md:block"></div>
+<div>
+<span class="text-[11px] font-bold tracking-widest text-slate-400 uppercase block">COMPLETED</span>
+<span class="text-3xl font-extrabold text-slate-700 block my-0.5 tracking-tight">04</span>
+<span class="text-xs font-semibold text-slate-500 block">Nov 2026</span>
+</div>
+</div>
+</article>
+<!-- Ticket 4: Next.js & Server Components (Purple - Draft) -->
+<article class="bg-white border border-slate-200 rounded-2xl shadow-sm hover:border-slate-300 transition-all overflow-hidden flex flex-col md:flex-row items-stretch">
+<!-- Colored Left Accent -->
+<div class="w-full md:w-3.5 bg-purple-600 shrink-0 h-2 md:h-auto"></div>
+<!-- Main Body Details -->
+<div class="flex-grow p-6 flex flex-col justify-between gap-5">
+<div class="flex flex-col sm:flex-row sm:items-start gap-4">
+<!-- Badge Icon Initial -->
+<div class="w-14 h-14 rounded-2xl bg-purple-50 border border-purple-200 flex items-center justify-center text-purple-700 font-bold text-lg shrink-0">
+              NX
+            </div>
+<div class="space-y-2 flex-grow">
+<div class="flex flex-wrap items-center gap-2.5">
+<span class="inline-flex items-center gap-1.5 bg-slate-100 text-slate-700 text-xs font-semibold px-2.5 py-1 rounded-full border border-slate-300/70">
+<span class="w-1.5 h-1.5 rounded-full bg-slate-500"></span>
+                  Draft (Unpublished)
+                </span>
+<span class="text-xs text-slate-400 font-mono">f55a1200-d31e-4509</span>
+</div>
+<h3 class="text-xl font-bold text-slate-900">Next.js &amp; Server Components</h3>
+<p class="text-sm text-slate-500">Target capacity: 80 seats • Ready for public registration launch</p>
+</div>
+</div>
+<!-- Capacity Bar & Action Buttons -->
+<div class="pt-3 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<!-- Capacity bar -->
+<div class="max-w-xs w-full">
+<div class="flex justify-between text-xs font-semibold mb-1.5">
+<span class="text-slate-700">Planned seats</span>
+<span class="text-slate-600 font-mono font-bold">0 / 80 (Draft)</span>
+</div>
+<div class="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
+<div class="bg-purple-600 h-2 rounded-full" style="width: 0%"></div>
+</div>
+</div>
+<!-- Action buttons -->
+<div class="flex flex-wrap items-center gap-2">
+<button class="px-3.5 py-1.5 text-xs font-semibold text-slate-700 bg-white border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors">
+                Edit draft
+              </button>
+<button class="px-4 py-1.5 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-sm transition-colors">
+                Publish event
+              </button>
+</div>
+</div>
+</div>
+<!-- Ticket Perforation & Date Stub -->
+<div class="border-t md:border-t-0 md:border-l border-dashed border-slate-300 relative px-8 py-6 flex md:flex-col items-center justify-center text-center shrink-0 min-w-[170px] bg-slate-50/40">
+<div class="notch-top hidden md:block"></div>
+<div class="notch-bottom hidden md:block"></div>
+<div>
+<span class="text-[11px] font-bold tracking-widest text-slate-400 uppercase block">TARGET DATE</span>
+<span class="text-3xl font-extrabold text-slate-900 block my-0.5 tracking-tight">12</span>
+<span class="text-xs font-semibold text-slate-500 block">Dec 2026</span>
+</div>
+</div>
+</article>
+</section>
+<!-- END: EventsSection -->
+<!-- BEGIN: QuickToolsWidget -->
+<!-- Secondary widget styled after Gather's dashed container pattern -->
+<section aria-label="Recent Attendee Signups" class="border-2 border-dashed border-slate-300 rounded-2xl p-6 bg-slate-50/60">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4 pb-4 border-b border-slate-200">
+<div>
+<h3 class="text-lg font-bold text-slate-900">Recent registration activity</h3>
+<p class="text-sm text-slate-500">Live stream of attendees reserving spots across your events.</p>
+</div>
+<button class="self-start md:self-auto text-xs font-semibold text-blue-600 hover:text-blue-800 bg-white border border-slate-200 px-3.5 py-2 rounded-lg shadow-sm transition-colors">
+          View full registration log →
+        </button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+<!-- Registration Activity 1 -->
+<div class="bg-white p-3.5 rounded-xl border border-slate-200 flex items-center justify-between text-xs">
+<div class="flex items-center gap-2.5">
+<span class="w-7 h-7 rounded-full bg-blue-100 text-blue-700 font-bold flex items-center justify-center text-[11px]">
+              RS
+            </span>
+<div>
+<p class="font-semibold text-slate-800">Rahul Sharma</p>
+<p class="text-slate-400 text-[11px]">Delhi Product Meetup</p>
+</div>
+</div>
+<span class="text-slate-400 font-mono text-[11px]">5m ago</span>
+</div>
+<!-- Registration Activity 2 -->
+<div class="bg-white p-3.5 rounded-xl border border-slate-200 flex items-center justify-between text-xs">
+<div class="flex items-center gap-2.5">
+<span class="w-7 h-7 rounded-full bg-emerald-100 text-emerald-700 font-bold flex items-center justify-center text-[11px]">
+              PJ
+            </span>
+<div>
+<p class="font-semibold text-slate-800">Pooja Joshi</p>
+<p class="text-slate-400 text-[11px]">Flask APIs evening</p>
+</div>
+</div>
+<span class="text-slate-400 font-mono text-[11px]">24m ago</span>
+</div>
+<!-- Registration Activity 3 -->
+<div class="bg-white p-3.5 rounded-xl border border-slate-200 flex items-center justify-between text-xs">
+<div class="flex items-center gap-2.5">
+<span class="w-7 h-7 rounded-full bg-blue-100 text-blue-700 font-bold flex items-center justify-center text-[11px]">
+              KM
+            </span>
+<div>
+<p class="font-semibold text-slate-800">Karan Malhotra</p>
+<p class="text-slate-400 text-[11px]">Delhi Product Meetup</p>
+</div>
+</div>
+<span class="text-slate-400 font-mono text-[11px]">1h ago</span>
+</div>
+</div>
+</section>
+<!-- END: QuickToolsWidget -->
+</main>
+<!-- END: MainContent -->
+<!-- BEGIN: MainFooter -->
+<footer class="bg-white border-t border-slate-200 py-6 mt-16">
+<div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+<!-- Brand Name -->
+<div class="font-bold tracking-wider text-slate-900 uppercase">
+        GATHER
+      </div>
+<!-- Links -->
+<nav class="flex items-center gap-2">
+<a class="hover:text-slate-900 transition-colors" href="#">Events</a>
+<span>•</span>
+<a class="hover:text-slate-900 transition-colors" href="#">My registrations</a>
+<span>•</span>
+<a class="text-slate-900 font-medium hover:text-slate-900 transition-colors" href="#">Organizer</a>
+</nav>
+<!-- Tagline -->
+<div class="text-slate-400">
+        Event registration made simple.
+      </div>
+</div>
+</footer>
+<!-- END: MainFooter -->
+</body></html>

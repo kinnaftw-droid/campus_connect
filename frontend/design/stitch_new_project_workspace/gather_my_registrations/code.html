@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Gather - My Registrations</title>
+<!-- Tailwind CSS v3 with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Plus Jakarta Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            gather: {
+              navy: '#182235',
+              dark: '#0f172a',
+              muted: '#64748b',
+              border: '#e2e8f0',
+              canvas: '#f8fafc',
+            }
+          }
+        }
+      }
+    }
+  </script>
+<!-- BEGIN: Custom Ticket Styling -->
+<style data-purpose="ticket-notch-layout">
+    /* Ticket container styling with perforated separator and ticket notches */
+    .ticket-card {
+      position: relative;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .ticket-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px -10px rgba(15, 23, 42, 0.08);
+    }
+
+    /* Top and bottom punched circular ticket cutouts */
+    .ticket-notch-top,
+    .ticket-notch-bottom {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      background-color: #f8fafc; /* Matches canvas background */
+      border-radius: 9999px;
+      z-index: 20;
+    }
+    .ticket-notch-top {
+      top: -8px;
+      border-bottom: 1.5px solid #e2e8f0;
+    }
+    .ticket-notch-bottom {
+      bottom: -8px;
+      border-top: 1.5px solid #e2e8f0;
+    }
+  </style>
+<!-- END: Custom Ticket Styling -->
+</head>
+<body class="bg-gather-canvas text-gather-dark font-sans min-h-screen flex flex-col antialiased selection:bg-slate-200">
+<!-- BEGIN: MainHeader -->
+<header class="bg-white border-b border-gather-border sticky top-0 z-50">
+<div class="max-w-7xl mx-auto px-6 h-18 py-3.5 flex items-center justify-between">
+<!-- Brand Logo & Ticket Icon -->
+<div class="flex items-center gap-2.5">
+<div class="w-9 h-9 rounded-lg bg-gather-navy text-white flex items-center justify-center shadow-sm">
+<!-- Ticket SVG Icon -->
+<svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-5.25h5.25M7.5 15h3M3.375 5.25c-.621 0-1.125.504-1.125 1.125v3.026a2.999 2.999 0 010 5.198v3.026c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-3.026a2.999 2.999 0 010-5.198V6.375c0-.621-.504-1.125-1.125-1.125H3.375z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<span class="text-xl font-extrabold tracking-wider text-gather-dark">GATHER</span>
+</div>
+<!-- Segmented Navigation Controls -->
+<nav aria-label="Main Navigation">
+<div class="inline-flex p-1 bg-slate-100 rounded-xl border border-slate-200/80 shadow-inner">
+<a class="px-5 py-2 text-sm font-semibold text-slate-600 hover:text-slate-900 rounded-lg transition-colors" href="#">
+            Events
+          </a>
+<a aria-current="page" class="px-5 py-2 text-sm font-semibold bg-gather-navy text-white rounded-lg shadow-sm" href="#">
+            My registrations
+          </a>
+<a class="px-5 py-2 text-sm font-semibold text-slate-600 hover:text-slate-900 rounded-lg transition-colors" href="#">
+            Organizer
+          </a>
+</div>
+</nav>
+<!-- User Profile Badge -->
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-2.5 px-3 py-1.5 rounded-full border border-slate-200 bg-white hover:border-slate-300 transition-colors shadow-sm cursor-pointer">
+<span class="w-7 h-7 rounded-full bg-slate-100 text-slate-700 font-bold text-xs flex items-center justify-center border border-slate-200">
+            AK
+          </span>
+<span class="text-xs font-semibold text-slate-700 pr-1">ananya@example.com</span>
+</div>
+</div>
+</div>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: MainContent -->
+<main class="flex-grow max-w-5xl w-full mx-auto px-6 py-10">
+<!-- Page Title & Counter Summary -->
+<section class="mb-8" data-purpose="page-heading">
+<h1 class="text-3xl font-extrabold text-slate-900 tracking-tight">Your tickets</h1>
+<p class="text-sm font-medium text-slate-500 mt-1">3 events you've registered for, newest first.</p>
+</section>
+<!-- Tickets Stack Container -->
+<section aria-label="Registered Tickets" class="space-y-4 mb-8" data-purpose="tickets-list">
+<!-- BEGIN: Ticket 1 (Flask APIs) -->
+<article class="ticket-card bg-white border border-gather-border rounded-2xl flex overflow-hidden shadow-sm relative group">
+<!-- Event Left Color Accent Strip -->
+<div class="w-2.5 bg-emerald-500 flex-shrink-0" title="Tech Event Tag"></div>
+<!-- Ticket Body Content -->
+<div class="flex-grow p-5 sm:p-6 flex items-center justify-between gap-4">
+<div class="flex items-center gap-4 sm:gap-5 min-w-0">
+<!-- Event Monogram Avatar -->
+<div class="w-13 h-13 sm:w-14 sm:h-14 rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-200 flex-shrink-0 flex items-center justify-center font-bold text-lg tracking-wide shadow-xs">
+              FA
+            </div>
+<!-- Event Details -->
+<div class="min-w-0">
+<h2 class="text-lg font-bold text-slate-900 truncate group-hover:text-emerald-700 transition-colors">
+                Flask APIs in one evening
+              </h2>
+<div class="flex items-center gap-2 mt-1">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200/80">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                  Open
+                </span>
+<span class="text-xs text-slate-400">•</span>
+<span class="text-xs font-medium text-slate-500">40 seats</span>
+</div>
+</div>
+</div>
+<!-- View Action Button -->
+<div class="flex-shrink-0 pr-3 sm:pr-4">
+<button class="px-4 py-2 text-xs sm:text-sm font-semibold rounded-lg border border-slate-200 hover:border-slate-900 text-slate-700 hover:text-slate-900 bg-white hover:bg-slate-50 transition-all focus:outline-none focus:ring-2 focus:ring-slate-400" type="button">
+              View event
+            </button>
+</div>
+</div>
+<!-- Perforated Tear-off Line with Notches -->
+<div class="relative flex flex-col items-center justify-center">
+<div class="ticket-notch-top -translate-x-1/2 left-1/2"></div>
+<div class="h-full border-r-2 border-dashed border-slate-200"></div>
+<div class="ticket-notch-bottom -translate-x-1/2 left-1/2"></div>
+</div>
+<!-- Ticket Stub: Registration Date -->
+<div class="w-28 sm:w-36 bg-slate-50/70 p-4 sm:p-6 flex-shrink-0 flex flex-col items-center justify-center text-center">
+<span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Registered</span>
+<span class="text-2xl sm:text-3xl font-extrabold text-slate-800 leading-none my-0.5">22</span>
+<span class="text-xs font-semibold text-slate-500">Nov 2026</span>
+</div>
+</article>
+<!-- END: Ticket 1 -->
+<!-- BEGIN: Ticket 2 (Delhi Product Meetup) -->
+<article class="ticket-card bg-white border border-gather-border rounded-2xl flex overflow-hidden shadow-sm relative group">
+<!-- Event Left Color Accent Strip -->
+<div class="w-2.5 bg-indigo-500 flex-shrink-0" title="Product Event Tag"></div>
+<!-- Ticket Body Content -->
+<div class="flex-grow p-5 sm:p-6 flex items-center justify-between gap-4">
+<div class="flex items-center gap-4 sm:gap-5 min-w-0">
+<!-- Event Monogram Avatar -->
+<div class="w-13 h-13 sm:w-14 sm:h-14 rounded-xl bg-indigo-50 text-indigo-700 border border-indigo-200 flex-shrink-0 flex items-center justify-center font-bold text-lg tracking-wide shadow-xs">
+              DP
+            </div>
+<!-- Event Details -->
+<div class="min-w-0">
+<h2 class="text-lg font-bold text-slate-900 truncate group-hover:text-indigo-700 transition-colors">
+                Delhi Product Meetup
+              </h2>
+<div class="flex items-center gap-2 mt-1">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200/80">
+<span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
+                  Open
+                </span>
+<span class="text-xs text-slate-400">•</span>
+<span class="text-xs font-medium text-slate-500">150 seats</span>
+</div>
+</div>
+</div>
+<!-- View Action Button -->
+<div class="flex-shrink-0 pr-3 sm:pr-4">
+<button class="px-4 py-2 text-xs sm:text-sm font-semibold rounded-lg border border-slate-200 hover:border-slate-900 text-slate-700 hover:text-slate-900 bg-white hover:bg-slate-50 transition-all focus:outline-none focus:ring-2 focus:ring-slate-400" type="button">
+              View event
+            </button>
+</div>
+</div>
+<!-- Perforated Tear-off Line with Notches -->
+<div class="relative flex flex-col items-center justify-center">
+<div class="ticket-notch-top -translate-x-1/2 left-1/2"></div>
+<div class="h-full border-r-2 border-dashed border-slate-200"></div>
+<div class="ticket-notch-bottom -translate-x-1/2 left-1/2"></div>
+</div>
+<!-- Ticket Stub: Registration Date -->
+<div class="w-28 sm:w-36 bg-slate-50/70 p-4 sm:p-6 flex-shrink-0 flex flex-col items-center justify-center text-center">
+<span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Registered</span>
+<span class="text-2xl sm:text-3xl font-extrabold text-slate-800 leading-none my-0.5">18</span>
+<span class="text-xs font-semibold text-slate-500">Nov 2026</span>
+</div>
+</article>
+<!-- END: Ticket 2 -->
+<!-- BEGIN: Ticket 3 (Design systems clinic) -->
+<article class="ticket-card bg-white border border-gather-border rounded-2xl flex overflow-hidden shadow-sm relative group">
+<!-- Event Left Color Accent Strip -->
+<div class="w-2.5 bg-amber-500 flex-shrink-0" title="Design Event Tag"></div>
+<!-- Ticket Body Content -->
+<div class="flex-grow p-5 sm:p-6 flex items-center justify-between gap-4">
+<div class="flex items-center gap-4 sm:gap-5 min-w-0">
+<!-- Event Monogram Avatar -->
+<div class="w-13 h-13 sm:w-14 sm:h-14 rounded-xl bg-amber-50 text-amber-700 border border-amber-200 flex-shrink-0 flex items-center justify-center font-bold text-lg tracking-wide shadow-xs">
+              DS
+            </div>
+<!-- Event Details -->
+<div class="min-w-0">
+<h2 class="text-lg font-bold text-slate-900 truncate group-hover:text-amber-700 transition-colors">
+                Design systems clinic
+              </h2>
+<div class="flex items-center gap-2 mt-1">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-600 border border-slate-200">
+<span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span>
+                  Closed
+                </span>
+<span class="text-xs text-slate-400">•</span>
+<span class="text-xs font-medium text-slate-500">30 seats</span>
+</div>
+</div>
+</div>
+<!-- View Action Button -->
+<div class="flex-shrink-0 pr-3 sm:pr-4">
+<button class="px-4 py-2 text-xs sm:text-sm font-semibold rounded-lg border border-slate-200 hover:border-slate-900 text-slate-700 hover:text-slate-900 bg-white hover:bg-slate-50 transition-all focus:outline-none focus:ring-2 focus:ring-slate-400" type="button">
+              View event
+            </button>
+</div>
+</div>
+<!-- Perforated Tear-off Line with Notches -->
+<div class="relative flex flex-col items-center justify-center">
+<div class="ticket-notch-top -translate-x-1/2 left-1/2"></div>
+<div class="h-full border-r-2 border-dashed border-slate-200"></div>
+<div class="ticket-notch-bottom -translate-x-1/2 left-1/2"></div>
+</div>
+<!-- Ticket Stub: Registration Date -->
+<div class="w-28 sm:w-36 bg-slate-50/70 p-4 sm:p-6 flex-shrink-0 flex flex-col items-center justify-center text-center">
+<span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Registered</span>
+<span class="text-2xl sm:text-3xl font-extrabold text-slate-800 leading-none my-0.5">04</span>
+<span class="text-xs font-semibold text-slate-500">Nov 2026</span>
+</div>
+</article>
+<!-- END: Ticket 3 -->
+</section>
+<!-- BEGIN: Discovery Banner -->
+<section class="border-2 border-dashed border-slate-300 rounded-2xl p-6 sm:p-8 bg-white/60 hover:bg-white transition-colors" data-purpose="discovery-banner">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-5">
+<div>
+<h3 class="text-base font-bold text-slate-900">Looking for something new?</h3>
+<p class="text-sm text-slate-500 mt-0.5">Open events are waiting for you.</p>
+</div>
+<div>
+<a class="inline-flex items-center justify-center px-6 py-2.5 rounded-xl bg-gather-navy hover:bg-slate-900 text-white font-semibold text-sm shadow-sm transition-all hover:shadow active:scale-95" href="#">
+            Browse events
+          </a>
+</div>
+</div>
+</section>
+<!-- END: Discovery Banner -->
+</main>
+<!-- END: MainContent -->
+<!-- BEGIN: MainFooter -->
+<footer class="mt-auto border-t border-gather-border bg-white text-xs text-slate-500" data-purpose="site-footer">
+<div class="max-w-7xl mx-auto px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+<!-- Brand Name -->
+<div class="font-bold text-slate-800 tracking-wider">
+        GATHER
+      </div>
+<!-- Navigation Links -->
+<nav aria-label="Footer links" class="flex items-center gap-2 font-medium">
+<a class="hover:text-slate-900 transition-colors" href="#">Events</a>
+<span class="text-slate-300">•</span>
+<a class="hover:text-slate-900 transition-colors" href="#">My registrations</a>
+<span class="text-slate-300">•</span>
+<a class="hover:text-slate-900 transition-colors" href="#">Organizer</a>
+</nav>
+<!-- Tagline -->
+<div class="text-slate-400 font-medium">
+        Event registration made simple
+      </div>
+</div>
+</footer>
+<!-- END: MainFooter -->
+</body></html>
