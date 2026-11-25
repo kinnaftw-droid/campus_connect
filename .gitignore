@@ -13,3 +13,7 @@ __pycache__/
 
 # Vercel and editor output
 .vercel/
+
+# Frontend dependencies and build output
+frontend/node_modules/
+frontend/dist/
