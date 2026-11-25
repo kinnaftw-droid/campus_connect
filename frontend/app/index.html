@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Gather event registration" />
+    <title>Gather — Event registration</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="#events" aria-label="Gather home">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M3 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2Z"/><path d="M12 5v2M12 17v2M12 11v2"/></svg>
+          </span>
+          <span>GATHER</span>
+        </a>
+        <nav class="primary-nav" aria-label="Primary navigation">
+          <a href="#events" data-nav="events">Events</a>
+          <a href="#registrations" data-nav="registrations">My registrations</a>
+          <a href="#organizer" data-nav="organizer">Organizer</a>
+        </nav>
+        <button class="identity-chip" id="identity-button" type="button" aria-label="Configure account">
+          <span class="avatar" id="avatar">?</span>
+          <span class="identity-text" id="identity-label">Configure account</span>
+        </button>
+      </div>
+    </header>
+
+    <main id="main-content" class="page-shell" tabindex="-1"></main>
+
+    <div class="toast-region" id="toast-region" aria-live="polite" aria-atomic="true"></div>
+
+    <dialog class="modal" id="settings-modal" aria-labelledby="settings-title">
+      <form method="dialog" class="modal-card" id="settings-form">
+        <div class="modal-heading">
+          <div>
+            <p class="eyebrow">Local session</p>
+            <h2 id="settings-title">Connect your account</h2>
+          </div>
+          <button class="icon-button" type="button" data-close-modal="settings-modal" aria-label="Close">×</button>
+        </div>
+        <p class="modal-copy">The API currently identifies people by UUID. Paste the UUID from your <code>users</code> table. It stays only in this browser.</p>
+        <label class="field-label" for="user-id">Your user ID <span>(required for registering)</span></label>
+        <input id="user-id" name="userId" class="text-input mono" type="text" placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" autocomplete="off" />
+        <label class="field-label" for="organizer-id">Organizer ID <span>(for hosted events)</span></label>
+        <input id="organizer-id" name="organizerId" class="text-input mono" type="text" placeholder="Usually the same as your user ID" autocomplete="off" />
+        <label class="field-label" for="api-base">API base URL <span>(optional)</span></label>
+        <input id="api-base" name="apiBase" class="text-input mono" type="url" placeholder="Same origin — no value needed when served by Flask" autocomplete="off" />
+        <p class="field-hint">For a separately hosted frontend, enter the Flask server URL. That server must allow browser CORS requests.</p>
+        <div class="modal-actions">
+          <button class="button button-secondary" type="button" data-close-modal="settings-modal">Cancel</button>
+          <button class="button button-primary" type="submit">Save account</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog class="modal" id="attendees-modal" aria-labelledby="attendees-title">
+      <section class="modal-card modal-card-wide">
+        <div class="modal-heading">
+          <div>
+            <p class="eyebrow">Organizer view</p>
+            <h2 id="attendees-title">Attendees</h2>
+          </div>
+          <button class="icon-button" type="button" data-close-modal="attendees-modal" aria-label="Close">×</button>
+        </div>
+        <div id="attendees-content"></div>
+      </section>
+    </dialog>
+
+    <template id="loading-template">
+      <div class="loading-state"><span class="spinner" aria-hidden="true"></span><span>Loading events…</span></div>
+    </template>
+    <script src="app.js"></script>
+  </body>
+</html>

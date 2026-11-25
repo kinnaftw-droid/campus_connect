@@ -1,0 +1,15 @@
+# Local secrets
+.env
+.env.*
+!.env.example
+backend/.env
+
+# Python environments and generated files
+venv/
+.venv/
+backend/venv/
+__pycache__/
+*.py[cod]
+
+# Vercel and editor output
+.vercel/

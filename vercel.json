@@ -1,0 +1,10 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "version": 2,
+  "outputDirectory": "frontend/app",
+  "functions": {
+    "api/index.py": {
+      "excludeFiles": "{backend/venv/**,backend/.agents/**,frontend/design/**}"
+    }
+  }
+}

@@ -1,14 +1,16 @@
 import os
 import uuid
+from pathlib import Path
 
 from dotenv import load_dotenv
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_from_directory
 from postgrest import APIError
 from supabase import Client, create_client
 
 load_dotenv()
 
-app = Flask(__name__)
+FRONTEND_DIR = Path(__file__).resolve().parent.parent / "frontend" / "app"
+app = Flask(__name__, static_folder=str(FRONTEND_DIR), static_url_path="/app")
 
 supabase_url = os.environ.get("SUPABASE_URL")
 supabase_key = os.environ.get("SUPABASE_PUBLISHABLE_KEY")
@@ -47,6 +49,12 @@ def index():
         "GET /api/me/registrations?user_id=<uuid>",
         "GET /api/events/<id>/registrations?organizer_id=<uuid>",
     ]})
+
+
+@app.get("/app/")
+def frontend():
+    """Serve the Gather SPA from the same origin as the API."""
+    return send_from_directory(app.static_folder, "index.html")
 
 
 @app.get("/api/events")
