@@ -4,6 +4,7 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 from flask import Flask, jsonify, request, send_from_directory
+from flask_cors import CORS
 from postgrest import APIError
 from supabase import Client, create_client
 
@@ -11,6 +12,15 @@ load_dotenv()
 
 FRONTEND_DIR = Path(__file__).resolve().parent.parent / "frontend" / "app"
 app = Flask(__name__, static_folder=str(FRONTEND_DIR), static_url_path="/app")
+
+# Set CORS_ORIGINS on Render to your Vercel URL (or a comma-separated list of
+# allowed origins). The permissive local default keeps browser development easy.
+cors_origins = [
+    origin.strip()
+    for origin in os.environ.get("CORS_ORIGINS", "*").split(",")
+    if origin.strip()
+]
+CORS(app, resources={r"/api/*": {"origins": cors_origins}})
 
 supabase_url = os.environ.get("SUPABASE_URL")
 supabase_key = os.environ.get("SUPABASE_PUBLISHABLE_KEY")
